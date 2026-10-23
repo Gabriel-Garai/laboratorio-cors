@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Laboratório CORS — Entrega 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 32px;
+      background: #f4f6f8;
+    }
+    main {
+      max-width: 650px;
+      padding: 24px;
+      background: white;
+      border-radius: 8px;
+    }
+    button {
+      padding: 12px;
+      cursor: pointer;
+    }
+    pre {
+      padding: 16px;
+      background: #eee;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    .erro { color: #b00020; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Laboratório CORS — Entrega 2</h1>
+    <p>Gabriel Martins Garai | RA: 2026108062</p>
+    <p>Origem: <strong id="origem"></strong></p>
+    <button id="executar">Executar Requisição</button>
+    <pre id="saida">Nenhuma requisição enviada.</pre>
+  </main>
+
+  <script>
+    document.getElementById("origem").textContent =
+      window.location.origin;
+
+    const API_URL = new URL(window.location.origin);
+    API_URL.hostname = API_URL.hostname.replace("-3000.", "-8080.");
+    API_URL.pathname = "/dados";
+
+    document.getElementById("executar").addEventListener("click", async () => {
+      const saida = document.getElementById("saida");
+      saida.classList.remove("erro");
+      saida.textContent = "Disparando requisição...";
+
+      try {
+       const resposta = await fetch(API_URL, {
+  method: "GET",
+  headers: {
+    "X-Identificador-Estudante": "2026108062"
+  }
+});
+
+        if (!resposta.ok) {
+          throw new Error(`HTTP ${resposta.status}`);
+        }
+
+        const dados = await resposta.json();
+        saida.textContent = JSON.stringify(dados, null, 2);
+      } catch (erro) {
+        saida.classList.add("erro");
+        saida.textContent = "Falha na requisição:\n" + erro.message;
+        console.error(erro);
+      }
+    });
+  </script>
+</body>
+</html>
