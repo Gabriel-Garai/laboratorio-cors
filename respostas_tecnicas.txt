@@ -1,0 +1,7 @@
+**Questão A — Fronteira de Bloqueio e Efeitos Colaterais**
+
+O CORS controla o acesso do navegador às respostas de outros servidores, mas não impede necessariamente que uma requisição seja processada. Por isso, uma operação pode alterar dados mesmo que a resposta seja bloqueada. São necessários mecanismos de autenticação, autorização e proteção contra CSRF.
+
+**Questão B — Razão de Existência Histórica do Preflight (OPTIONS)**
+
+O preflight verifica previamente se o servidor autoriza métodos e cabeçalhos que não fazem parte das requisições simples. Requisições tradicionais de formulários são dispensadas para preservar a compatibilidade com sistemas antigos. Sem essa distinção, aplicações legadas poderiam deixar de funcionar corretamente.

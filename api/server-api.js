@@ -5,6 +5,17 @@ const ORIGEM_CLIENTE =
   `https://${process.env.CODESPACE_NAME}-3000.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`;
 
 http.createServer((req, res) => {
+if (req.method === 'OPTIONS') {
+  res.writeHead(204, {
+    'Access-Control-Allow-Origin': 'https://upgraded-robot-q7w7j6p94vjq24rp5-3000.app.github.dev',  
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'X-Identificador-Estudante, Content-Type',
+    'Access-Control-Max-Age': '60'
+  });
+  res.end();
+  return;
+}
+
   if (req.method === "GET" && req.url === "/dados") {
     res.writeHead(200, {
       "Content-Type": "application/json; charset=utf-8",

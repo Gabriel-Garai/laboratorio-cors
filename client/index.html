@@ -30,7 +30,7 @@
 </head>
 <body>
   <main>
-    <h1>Laboratório CORS — Entrega 2</h1>
+    <h1>Laboratório CORS — Entrega 3</h1>
     <p>Gabriel Martins Garai | RA: 2026108062</p>
     <p>Origem: <strong id="origem"></strong></p>
     <button id="executar">Executar Requisição</button>
@@ -41,9 +41,7 @@
     document.getElementById("origem").textContent =
       window.location.origin;
 
-    const API_URL = new URL(window.location.origin);
-    API_URL.hostname = API_URL.hostname.replace("-3000.", "-8080.");
-    API_URL.pathname = "/dados";
+      const API_URL = "https://upgraded-robot-q7w7j6p94vjq24rp5-8080.app.github.dev/dados";
 
     document.getElementById("executar").addEventListener("click", async () => {
       const saida = document.getElementById("saida");
@@ -53,9 +51,9 @@
       try {
        const resposta = await fetch(API_URL, {
   method: "GET",
-  headers: {
-    "X-Identificador-Estudante": "2026108062"
-  }
+headers: {
+  "X-Identificador-Estudante": "2026108062"
+}
 });
 
         if (!resposta.ok) {
